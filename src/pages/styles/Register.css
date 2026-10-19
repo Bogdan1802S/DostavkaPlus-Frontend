@@ -1,0 +1,11 @@
+.register-card { width: min(100%, 380px); margin: 8px auto 24px; overflow: hidden; }
+.register-form { padding: 20px 24px 12px; }
+.register-form .form-field { margin-bottom: 12px; }
+.register-form .field { min-height: 36px; }
+.register-form .password-wrap { display: flex; position: relative; }
+.register-form .password-wrap .field { padding-right: 42px; }
+.register-form .password-toggle { position: absolute; right: 8px; top: 3px; width: 32px; height: 30px; border: 0; background: transparent; color: var(--muted); }
+.consent { display: flex; align-items: center; gap: 8px; margin: 16px 0; }
+.consent input { width: 18px; height: 18px; accent-color: var(--primary); }
+.register-submit { width: 100%; }
+.register-footer { margin: 12px 16px 24px; text-align: center; color: var(--link); }

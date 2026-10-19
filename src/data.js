@@ -1,0 +1,107 @@
+export const categories = [
+    "Овощи и фрукты",
+    "Молочные продукты",
+    "Хлеб и выпечка",
+    "Напитки",
+    "Бакалея",
+];
+
+export const products = [
+    { id: 1, name: "Яблоки", unit: "1 кг", price: 129, category: "Овощи и фрукты" },
+    { id: 2, name: "Молоко", unit: "1 л", price: 89, category: "Молочные продукты" },
+    { id: 3, name: "Хлеб белый", unit: "400 г", price: 45, category: "Хлеб и выпечка" },
+    { id: 4, name: "Сыр", unit: "200 г", price: 219, category: "Молочные продукты" },
+    { id: 5, name: "Бананы", unit: "1 кг", price: 99, category: "Овощи и фрукты" },
+    { id: 6, name: "Вода", unit: "1,5 л", price: 49, category: "Напитки" },
+    { id: 7, name: "Рис", unit: "1 кг", price: 119, category: "Бакалея" },
+    { id: 8, name: "Кефир", unit: "1 л", price: 79, category: "Молочные продукты" },
+];
+
+export const initialCart = [
+    { productId: 1, quantity: 2 },
+    { productId: 2, quantity: 1 },
+    { productId: 3, quantity: 4 },
+];
+
+export const initialOrders = [
+    {
+        id: 1024,
+        customer: "Анна С.",
+        phone: "+7 900 123-45-67",
+        address: "г. Ростов-на-Дону, ул. Садовая, д. 10, кв. 5",
+        shortAddress: "Садовая, 10, кв. 5",
+        date: "19.10.2026",
+        time: "18:00–19:00",
+        total: 677,
+        status: "В пути",
+        payment: "online",
+        courier: "Иван П.",
+        items: [
+            { productId: 1, quantity: 2 },
+            { productId: 2, quantity: 1 },
+            { productId: 3, quantity: 4 },
+        ],
+    },
+    {
+        id: 1026,
+        customer: "Олег Н.",
+        phone: "+7 900 222-33-44",
+        address: "Пушкинская, 45, кв. 12",
+        shortAddress: "Пушкинская, 45, кв. 12",
+        date: "20.10.2026",
+        time: "19:00–20:00",
+        total: 540,
+        status: "Новый",
+        payment: "cash",
+        courier: "",
+        items: [{ productId: 4, quantity: 1 }, { productId: 6, quantity: 2 }],
+    },
+    {
+        id: 1027,
+        customer: "Ирина В.",
+        phone: "+7 900 777-88-99",
+        address: "Большая Садовая, 3",
+        shortAddress: "Большая Садовая, 3",
+        date: "20.10.2026",
+        time: "20:00–21:00",
+        total: 312,
+        status: "Новый",
+        payment: "online",
+        courier: "",
+        items: [{ productId: 5, quantity: 2 }, { productId: 8, quantity: 1 }],
+    },
+    {
+        id: 1019,
+        customer: "Анна С.",
+        phone: "+7 900 123-45-67",
+        address: "Садовая, 10",
+        shortAddress: "Садовая, 10",
+        date: "12.10.2026",
+        time: "14:00–15:00",
+        total: 412,
+        status: "Доставлен",
+        payment: "online",
+        courier: "Иван П.",
+        items: [{ productId: 1, quantity: 1 }, { productId: 3, quantity: 2 }],
+    },
+    {
+        id: 1018,
+        customer: "Павел Т.",
+        phone: "+7 900 333-44-55",
+        address: "Ленина, 7",
+        shortAddress: "Ленина, 7",
+        date: "11.10.2026",
+        time: "12:00–13:00",
+        total: 268,
+        status: "Отменён",
+        payment: "cash",
+        courier: "",
+        items: [{ productId: 4, quantity: 1 }],
+    },
+];
+
+export const couriers = [
+    { name: "Иван П.", online: true },
+    { name: "Мария К.", online: true },
+    { name: "Алексей Р.", online: false },
+];

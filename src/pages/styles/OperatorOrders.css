@@ -1,0 +1,12 @@
+.operator-filters { display: grid; grid-template-columns: 170px minmax(200px, 1fr); gap: 12px; margin-bottom: 16px; }
+.orders-table-wrap { overflow-x: auto; }
+.orders-table { width: 100%; border-collapse: collapse; white-space: nowrap; font-size: 12px; }
+.orders-table th { height: 36px; padding: 8px; background: #eceff1; color: #546e7a; text-align: left; }
+.orders-table td { height: 58px; padding: 8px; border-bottom: 1px solid #eceff1; }
+.orders-table tr:last-child td { border-bottom: 0; }
+.courier-select { width: 122px; height: 30px; padding: 4px 6px; border: 1px solid var(--border); border-radius: 6px; background: #fff; color: var(--text); }
+.operator-actions { display: flex; gap: 6px; }
+.small-action { min-height: 30px; padding: 4px 9px; font-size: 12px; }
+.table-empty { padding: 24px !important; text-align: center; color: var(--muted); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
+@media (max-width: 560px) { .operator-filters { grid-template-columns: 1fr; } }

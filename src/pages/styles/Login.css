@@ -1,0 +1,14 @@
+.auth-card { width: min(100%, 380px); margin: 24px auto; overflow: hidden; }
+.auth-tabs { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
+.auth-tab { min-height: 52px; display: grid; place-items: center; color: var(--muted); font-size: 16px; }
+.auth-tab.active { color: var(--primary); border-bottom: 3px solid var(--primary); font-weight: 700; }
+.auth-form { padding: 24px; }
+.password-wrap { display: flex; position: relative; }
+.password-wrap .field { padding-right: 42px; }
+.password-toggle { position: absolute; right: 8px; top: 4px; width: 32px; height: 30px; color: var(--muted); border: 0; background: transparent; }
+.auth-message-row { min-height: 22px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.link-button { padding: 0; color: var(--link); border: 0; background: none; font-size: 12px; }
+.auth-submit { width: 100%; margin-top: 14px; }
+.auth-footnote { margin: 0 16px 8px; text-align: center; color: #546e7a; }
+.guest-link { display: block; margin: 0 16px 24px; text-align: center; }
+.auth-notice { margin: 8px 0 0; color: var(--success); font-size: 12px; }

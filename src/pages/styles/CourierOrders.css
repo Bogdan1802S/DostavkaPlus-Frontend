@@ -1,0 +1,23 @@
+.courier-title-row { display: flex; align-items: center; justify-content: space-between; }
+.line-toggle { display: inline-flex; align-items: center; gap: 10px; color: var(--success); font-weight: 700; }
+.line-toggle input { position: absolute; opacity: 0; }
+.toggle-track { width: 38px; height: 22px; padding: 3px; border-radius: 14px; background: #90a4ae; transition: background 0.15s; }
+.toggle-track span { display: block; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: transform 0.15s; }
+.line-toggle input:checked + .toggle-track { background: var(--success); }
+.line-toggle input:checked + .toggle-track span { transform: translateX(16px); }
+.offline-notice { margin-bottom: 16px; padding: 12px 16px; border-radius: 8px; background: var(--sidebar); color: #8d4b00; }
+.delivery-card { position: relative; margin-bottom: 16px; padding: 16px 20px; }
+.delivery-card-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.delivery-card h2 { margin: 0; font-size: 16px; }
+.delivery-address, .delivery-phone { margin: 10px 0; color: #546e7a; }
+.delivery-phone a { color: var(--link); }
+.payment-badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+.payment-badge.paid { background: #e8f5e9; color: var(--success); }
+.payment-badge.cash { background: var(--sidebar); color: var(--primary-dark); }
+.delivery-action { position: absolute; right: 20px; bottom: 16px; }
+.delivered-button { background: var(--success); }
+.completed-label { color: var(--success); font-weight: 700; }
+@media (max-width: 560px) {
+    .delivery-action { position: static; margin-top: 14px; }
+    .delivery-action .button { width: 100%; }
+}

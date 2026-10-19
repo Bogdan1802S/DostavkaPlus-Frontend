@@ -1,0 +1,30 @@
+.cart-page { display: grid; grid-template-columns: minmax(0, 560px) minmax(240px, 266px); gap: 26px; align-items: start; }
+.cart-row { min-height: 80px; margin-bottom: 12px; padding: 10px 12px; display: grid; grid-template-columns: 56px minmax(100px, 1fr) 100px auto 24px; gap: 12px; align-items: center; }
+.cart-thumb { height: 56px; display: grid; place-items: center; border-radius: 6px; background: #eceff1; color: #90a4ae; font-size: 10px; }
+.cart-item-info { display: grid; gap: 6px; }
+.cart-item-info .muted { font-size: 12px; }
+.quantity-control { height: 32px; display: flex; align-items: center; justify-content: space-around; border: 1px solid var(--border); border-radius: 6px; }
+.quantity-control button { width: 28px; height: 30px; border: 0; background: transparent; color: var(--primary); font-size: 18px; font-weight: 700; }
+.quantity-control strong { min-width: 20px; text-align: center; }
+.line-total { white-space: nowrap; }
+.remove-item { border: 0; background: transparent; color: var(--muted); font-size: 22px; }
+.continue-link { display: inline-block; margin-top: 12px; font-weight: 700; }
+.cart-summary { padding: 16px; }
+.cart-summary h2 { margin: 0 0 16px; font-size: 18px; }
+.summary-line, .summary-total { display: flex; justify-content: space-between; gap: 8px; margin: 12px 0; }
+.summary-line { color: #546e7a; }
+.discount { color: var(--success); }
+.summary-total { padding-top: 14px; border-top: 1px solid var(--border); font-size: 18px; }
+.summary-total strong:last-child { color: var(--primary); }
+.promo-row { display: grid; grid-template-columns: 1fr 64px; gap: 8px; margin: 18px 0; }
+.promo-row .button { min-height: 38px; padding-inline: 8px; }
+.checkout-button { width: 100%; min-height: 46px; }
+.empty-cart { padding: 24px; text-align: center; }
+@media (max-width: 760px) { .cart-page { grid-template-columns: 1fr; } }
+@media (max-width: 540px) {
+    .cart-row { grid-template-columns: 48px 1fr 24px; }
+    .cart-thumb { height: 48px; }
+    .quantity-control { grid-column: 2; width: 100px; }
+    .line-total { grid-column: 2; }
+    .remove-item { grid-column: 3; grid-row: 1; }
+}
