@@ -4,7 +4,7 @@ import { categories, products } from "../data";
 import "./styles/Catalog.css";
 
 export default function Catalog() {
-    const { cart, cartTotal, addToCart, orders, role, setToast } = useOutletContext();
+    const { cart, cartTotal, addToCart, setQuantity, removeFromCart, orders, role, setToast } = useOutletContext();
     const [category, setCategory] = useState(categories[0]);
     const location = useLocation();
     const navigate = useNavigate();
@@ -73,7 +73,7 @@ export default function Catalog() {
                                     <span className="muted">{product.unit}</span>
                                     <strong>{product.price} руб.</strong>
                                 </div>
-                                {role === "client" ? <button className="button button-primary add-button" onClick={() => addProduct(product.id)}>В корзину</button> : <button className="button button-outline add-button" onClick={() => addProduct(product.id)}>Войти, чтобы купить</button>}
+                                {role === "client" ? (cart.find((item) => item.productId === product.id) ? <div className="product-quantity add-button" aria-label={`Количество ${product.name}`}><button type="button" aria-label="Уменьшить количество" onClick={() => { const item = cart.find((entry) => entry.productId === product.id); if (item.quantity <= 1) removeFromCart(product.id); else setQuantity(product.id, item.quantity - 1); }}>−</button><strong>{cart.find((item) => item.productId === product.id).quantity}</strong><button type="button" aria-label="Увеличить количество" onClick={() => setQuantity(product.id, cart.find((item) => item.productId === product.id).quantity + 1)}>+</button></div> : <button className="button button-primary add-button" onClick={() => addProduct(product.id)}>В корзину</button>) : <button className="button button-outline add-button" onClick={() => addProduct(product.id)}>Войти, чтобы купить</button>}
                             </article>
                         ))}
                         {!shownProducts.length && <p className="empty-result">Товары не найдены.</p>}

@@ -328,3 +328,8 @@
         font-size: 12px;
     }
 }
+
+.product-quantity { width: 100%; min-height: 42px; margin-top: 14px; display: flex; align-items: center; justify-content: space-between; overflow: hidden; border: 1px solid #e8cdb7; border-radius: 999px; background: #fff8f1; color: #333; }
+.product-quantity button { width: 42px; align-self: stretch; border: 0; background: transparent; color: #333; font-size: 20px; cursor: pointer; transition: background 150ms ease; }
+.product-quantity button:hover { background: #fbe7d4; }
+.product-quantity strong { min-width: 24px; text-align: center; }
