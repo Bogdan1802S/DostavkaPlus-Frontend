@@ -112,7 +112,7 @@ function Header({ role, cartCount }) {
                             )}
 
                             {role === "client" && <Link className="cart-link" to="/cart">
-                                <span aria-hidden="true">▢</span>
+                                <svg className="cart-link__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M3.5 4.5h2l2.1 10.1a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 1.9-1.4l1.4-6.3H7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/><circle cx="10" cy="19.5" r="1.25" fill="currentColor"/><circle cx="17" cy="19.5" r="1.25" fill="currentColor"/></svg>
                                 <span>Корзина ({cartCount})</span>
                             </Link>}
 

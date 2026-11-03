@@ -699,3 +699,5 @@ button:disabled,
         padding: 7px 10px;
     }
 }
+
+.cart-link__icon { width: 18px; height: 18px; flex: 0 0 18px; }
