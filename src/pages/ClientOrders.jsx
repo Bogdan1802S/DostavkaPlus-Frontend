@@ -35,7 +35,7 @@ export default function ClientOrders() {
     return (
         <section className="orders-page">
             <h1 className="page-title">Мои заказы</h1>
-            <div className="segment-control">
+            <div className={`segment-control ${tab === "completed" ? "segment-control--completed" : ""}`}>
                 <button className={tab === "active" ? "selected" : ""} onClick={() => setTab("active")}>Активные</button>
                 <button className={tab === "completed" ? "selected" : ""} onClick={() => setTab("completed")}>Завершённые</button>
             </div>
@@ -54,7 +54,7 @@ export default function ClientOrders() {
                         {!["Отменён", "Доставлен"].includes(order.status) && (
                             <div className="order-progress">
                                 <div className="progress-track">
-                                    <span style={{ width: `${Math.max(0, currentStage) * 33.333}%` }} />
+                                    <span style={{ width: `${Math.max(0, currentStage) * 25 + 12.5}%` }} />
                                 </div>
                                 {stages.map((stage, index) => (
                                     <div className={`progress-step ${index <= currentStage ? "passed" : ""} ${index === currentStage ? "current" : ""}`} key={stage}>

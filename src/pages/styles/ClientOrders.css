@@ -51,3 +51,53 @@
     .progress-step { font-size: 10px; }
     .client-order-bottom { align-items: stretch; flex-direction: column; }
 }
+
+.segment-control button { min-height: 30px; padding: 5px 14px; color: #777; border: 1px solid transparent; font-size: 12px; }
+.segment-control button.selected { background: #fff3e8; color: #b76521; border-color: #f1c99f; }
+.segment-control button:not(.selected) { border-color: #e5e0dc; }
+.order-open-link { color: #333; }
+.progress-track { top: 9px; height: 3px; background: #eee5dc; }
+.progress-track span { display: none; }
+.progress-dot { width: 14px; height: 14px; border: 2px solid #333; background: #fff; }
+.progress-step.passed .progress-dot { border-color: #333; background: #fff; }
+.progress-step:not(.passed) .progress-dot { border-color: #eee5dc; }
+.orders-page .status-active { background: #1976d2; color: #fff; }
+.orders-page .client-order-bottom > button.button-danger { display: none; }
+.orders-page .order-open-link:hover { background: transparent; }
+
+/* Tracker follows the orange filled style from the current screenshot. */
+.progress-track { top: 9px; height: 4px; background: var(--border); }
+.progress-track span { display: block; height: 100%; background: var(--primary); }
+.progress-dot { width: 20px; height: 20px; border: 3px solid var(--border); border-radius: 50%; background: #fff; }
+.progress-step.passed .progress-dot { border-color: var(--primary); background: var(--primary); }
+
+.progress-step.passed:not(.current) .progress-dot { position: relative; border-color: #e9781b; background: #e9781b; }
+.progress-step.passed:not(.current) .progress-dot::after { position: absolute; top: 2px; left: 4px; width: 6px; height: 3px; border-left: 2px solid #fff; border-bottom: 2px solid #fff; content: ''; transform: rotate(-45deg); }
+.progress-step.current .progress-dot { border: 4px solid #f6d9c3; background: #e9781b; }
+.progress-step:not(.passed) .progress-dot { border-color: #eadfd6; background: #fff; }
+.progress-track { height: 4px; }
+
+/* Match the order tracking page progress treatment. */
+.progress-track { top: 9px; height: 4px; border-radius: 99px; background: var(--border); }
+.progress-track span { height: 100%; border-radius: 99px; background: var(--orange); }
+.progress-dot { width: 20px; height: 20px; display: grid; place-items: center; border: 3px solid var(--border); background: #fff; }
+.progress-step.passed:not(.current) .progress-dot { border-color: var(--orange); background: var(--orange); }
+.progress-step.passed:not(.current) .progress-dot::after { width: 5px; height: 8px; border-right: 2px solid #fff; border-bottom: 2px solid #fff; content: ''; transform: translateY(-1px) rotate(45deg); }
+.progress-step.current .progress-dot { border-color: var(--orange); background: var(--orange); }
+.progress-step:not(.passed) .progress-dot { border-color: var(--border); background: #fff; }
+
+.progress-step.passed:not(.current) .progress-dot::after { position: static; top: auto; left: auto; width: 5px; height: 8px; border: 0; border-right: 2px solid #fff; border-bottom: 2px solid #fff; transform: translateY(-1px) rotate(45deg); }
+.progress-dot { display: grid; place-items: center; }
+
+.progress-step.current:first-child .progress-dot { display: grid; place-items: center; }
+.progress-step.current:first-child .progress-dot::after { position: static; top: auto; left: auto; width: 5px; height: 8px; border: 0; border-right: 2px solid #fff; border-bottom: 2px solid #fff; content: ''; transform: translateY(-1px) rotate(45deg); }
+
+.progress-step.current:nth-child(2) .progress-dot { display: grid; place-items: center; }
+.progress-step.current:nth-child(2) .progress-dot::after { position: static; top: auto; left: auto; width: 5px; height: 8px; border: 0; border-right: 2px solid #fff; border-bottom: 2px solid #fff; content: ''; transform: translateY(-1px) rotate(45deg); }
+
+.segment-control { position: relative; isolation: isolate; overflow: hidden; }
+.segment-control::before { position: absolute; z-index: -1; top: 3px; bottom: 3px; left: 3px; width: calc(50% - 3px); border-radius: 16px; background: #fff3e8; content: ''; transition: transform 240ms cubic-bezier(.2,.8,.2,1); }
+.segment-control.segment-control--completed::before { transform: translateX(100%); }
+.segment-control button, .segment-control button.selected, .segment-control button:not(.selected) { position: relative; z-index: 1; border: 0; border-radius: 0; background: transparent; transition: color 180ms ease; }
+.segment-control button.selected { color: #b76521; }
+.segment-control button:not(.selected) { color: #777; }
