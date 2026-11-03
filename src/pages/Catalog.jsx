@@ -116,7 +116,6 @@ export default function Catalog() {
                                 ))}
                             </div>
                             <p className="muted">Курьер: {activeOrder.courier || "назначается"}</p>
-                            <button className="text-button" onClick={() => navigate(`/track/${activeOrder.id}`)}>Отследить заказ</button>
                         </>
                     ) : <p className="muted">Активных заказов пока нет.</p>}
                 </section>}

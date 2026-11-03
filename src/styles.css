@@ -13,6 +13,8 @@
     --text: #263238;
     --primary: #ff6f00;
     --primary-dark: #e65100;
+    --action: #df7625;
+    --action-hover: #ce681b;
     --muted: #8c8177;
     --orange: #ff6f00;
     --orange-dark: #e65100;
@@ -235,8 +237,8 @@ textarea {
     border: 0;
     border-radius: 999px;
     padding: 0 16px;
-    background: var(--orange);
-    color: #263238;
+    background: var(--action);
+    color: #fff;
     font-size: 13px;
     font-weight: 700;
     text-decoration: none;
@@ -247,7 +249,7 @@ textarea {
 .cart-link:hover,
 .login-link:hover {
     transform: translateY(-1px);
-    background: var(--orange-dark);
+    background: var(--action-hover);
 }
 
 .profile-button {
@@ -337,12 +339,12 @@ textarea {
 }
 
 .button-primary {
-    background: var(--orange);
-    color: #263238;
+    background: var(--action);
+    color: #fff;
 }
 
 .button-primary:hover:not(:disabled) {
-    background: var(--orange-dark);
+    background: var(--action-hover);
     box-shadow: 0 5px 12px rgba(206, 104, 27, 0.18);
 }
 
@@ -437,7 +439,7 @@ button:disabled,
 
 .status-active {
     background: var(--orange);
-    color: #263238;
+    color: #fff;
 }
 
 .status-done {
