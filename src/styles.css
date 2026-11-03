@@ -701,3 +701,15 @@ button:disabled,
 }
 
 .cart-link__icon { width: 18px; height: 18px; flex: 0 0 18px; }
+
+.profile-menu { position: relative; }
+.profile-button { display: inline-flex; align-items: center; justify-content: center; gap: 5px; cursor: pointer; }
+.profile-chevron { width: 10px; height: 7px; flex: 0 0 10px; display: block; transition: transform 160ms ease; }
+.profile-chevron--open { transform: rotate(180deg); }
+.profile-menu__logout { position: absolute; z-index: 5; top: calc(100% + 8px); right: 0; min-width: 120px; padding: 11px 14px; border: 1px solid #f0e5da; border-radius: 12px; background: #fffaf4; color: #766b61; text-align: left; box-shadow: 0 8px 24px #4a2b151a; cursor: pointer; }
+.profile-menu { position: relative; }
+.profile-button { display: inline-flex; align-items: center; justify-content: center; gap: 5px; cursor: pointer; }
+.profile-chevron { width: 10px; height: 7px; flex: 0 0 10px; display: block; transition: transform 160ms ease; }
+.profile-chevron--open { transform: rotate(180deg); }
+.profile-menu__logout { position: absolute; z-index: 5; top: calc(100% + 8px); right: 0; min-width: 120px; padding: 11px 14px; border: 1px solid #f0e5da; border-radius: 12px; background: #fffaf4; color: #766b61; text-align: left; box-shadow: 0 8px 24px #4a2b151a; cursor: pointer; }
+.profile-menu__logout:hover { background: #fff0df; color: #985324; }

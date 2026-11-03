@@ -51,6 +51,7 @@ function Header({ role, cartCount }) {
     const location = useLocation();
     const navigate = useNavigate();
     const [search, setSearch] = useState("");
+    const [profileOpen, setProfileOpen] = useState(false);
 
     const isStaffPage =
         location.pathname.startsWith("/courier-orders") ||
@@ -116,10 +117,13 @@ function Header({ role, cartCount }) {
                                 <span>Корзина ({cartCount})</span>
                             </Link>}
 
-                            {role === "client" ? (
-                                <button className="profile-button" onClick={logout}>
-                                    Профиль <span aria-hidden="true">⌄</span>
-                                </button>
+{role === "client" ? (
+                                <div className="profile-menu">
+                                    <button className="profile-button" aria-expanded={profileOpen} onClick={() => setProfileOpen((open) => !open)}>
+                                        Профиль <svg className={`profile-chevron${profileOpen ? " profile-chevron--open" : ""}`} aria-hidden="true" viewBox="0 0 12 8" fill="none"><path d="m2 2 4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                                    </button>
+                                    {profileOpen && <button className="profile-menu__logout" onClick={logout}>Выйти</button>}
+                                </div>
                             ) : (
                                 <Link className="login-link" to="/login">
                                     Войти
