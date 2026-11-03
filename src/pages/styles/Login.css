@@ -12,3 +12,10 @@
 .auth-footnote { margin: 0 16px 8px; text-align: center; color: #546e7a; }
 .guest-link { display: block; margin: 0 16px 24px; text-align: center; }
 .auth-notice { margin: 8px 0 0; color: var(--success); font-size: 12px; }
+.auth-card { box-shadow: none; border-radius: 14px; }
+.auth-tabs { border-bottom: 1px solid #e8e5e1; }
+.auth-tab.active { color: #333; border-bottom: 0; font-weight: 700; }
+.auth-submit { background: #f3bc8c; box-shadow: none; }
+.auth-submit:hover:not(:disabled) { background: #efb27d; box-shadow: none; }
+.auth-card .field, .auth-card .field:focus { border-color: #e2dfdb; outline: none; box-shadow: none; }
+.auth-card .field:focus-visible { border-color: #e2dfdb; outline: none; box-shadow: none; }
