@@ -20,3 +20,12 @@
 .checkout-total strong:last-child { color: var(--primary); }
 @media (max-width: 760px) { .checkout-layout { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .checkout-row { grid-template-columns: 1fr; gap: 0; } }
+
+.payment-fieldset input { accent-color: #1976d2; }
+.checkout-total strong { color: #333; }
+.checkout-total strong:last-child { color: #333; }
+.checkout-summary { padding: 18px; }
+.checkout-summary .checkout-button { background: #f3bc8c; box-shadow: none; }
+.checkout-summary .checkout-button:hover:not(:disabled) { background: #efb27d; box-shadow: none; }
+.checkout-layout .field, .checkout-layout .field:focus, .checkout-layout .select, .checkout-layout .select:focus, .checkout-layout .textarea, .checkout-layout .textarea:focus { border-color: #e2dfdb; outline: none; box-shadow: none; }
+.checkout-layout input[type=radio] { box-shadow: none; }

@@ -10,10 +10,10 @@ function formatRussianPhoneDigits(digits) {
     const first = digits.slice(3, 6);
     const second = digits.slice(6, 8);
     const third = digits.slice(8, 10);
-    return `+7-(${area}${area.length === 3 ? ")" : ""}${first ? `-${first}` : ""}${first.length === 3 && second ? `-${second}` : ""}${second.length === 2 && third ? `-${third}` : ""}`;
+    return `+7 ${area}${first ? ` ${first}` : ""}${first.length === 3 && second ? `-${second}` : ""}${second.length === 2 && third ? `-${third}` : ""}`;
 }
 
-export const RUSSIAN_PHONE_PATTERN = /^\+7-\(\d{3}\)-\d{3}-\d{2}-\d{2}$/;
+export const RUSSIAN_PHONE_PATTERN = /^\+7 \d{3} \d{3}-\d{2}-\d{2}$/;
 
 export function handlePhoneKeyDown(event, onChange) {
     if (event.key !== "Backspace" && event.key !== "Delete") return;

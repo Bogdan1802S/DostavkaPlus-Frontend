@@ -17,7 +17,7 @@ export default function Checkout() {
     maxDay.setDate(today.getDate() + 7);
 
     const [address, setAddress] = useState("г. Ростов-на-Дону, ул. Садовая, д. 10, кв. 5");
-    const [phone, setPhone] = useState("+7-(900)-123-45-67");
+    const [phone, setPhone] = useState("+7 900 123-45-67");
     const [date, setDate] = useState(toDateInputValue(today));
     const [time, setTime] = useState("");
     const [payment, setPayment] = useState("online");
@@ -56,8 +56,8 @@ export default function Checkout() {
                     <div className="checkout-row">
                         <label className="form-field">
                             <span className="form-label">Телефон</span>
-                            <input className="field" type="tel" inputMode="tel" autoComplete="tel" value={phone} maxLength={18} placeholder="+7-(999)-999-99-99" onKeyDown={(event) => handlePhoneKeyDown(event, setPhone)} onChange={(event) => setPhone(formatRussianPhone(event.target.value))} required />
-                            {!validPhone && <span className="error-text">Формат: +7-(999)-999-99-99</span>}
+                            <input className="field" type="tel" inputMode="tel" autoComplete="tel" value={phone} maxLength={18} placeholder="+7 900 123-45-67" onKeyDown={(event) => handlePhoneKeyDown(event, setPhone)} onChange={(event) => setPhone(formatRussianPhone(event.target.value))} required />
+                            {!validPhone && <span className="error-text">Формат: +7 900 123-45-67</span>}
                         </label>
                         <label className="form-field">
                             <span className="form-label">Дата</span>
