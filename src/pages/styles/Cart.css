@@ -28,3 +28,12 @@
     .line-total { grid-column: 2; }
     .remove-item { grid-column: 3; grid-row: 1; }
 }
+
+.cart-products > .page-title { font-size: 24px; font-weight: 600; letter-spacing: 0; }
+.cart-row { padding: 12px 14px; }
+.quantity-control button { color: #333; }
+.quantity-control strong { color: #333; }
+.remove-item { font-size: 18px; font-weight: 300; line-height: 1; }
+.cart-summary { padding: 18px; }
+.summary-total strong { color: #333; font-weight: 700; }
+.summary-total strong:last-child { color: #333; }
