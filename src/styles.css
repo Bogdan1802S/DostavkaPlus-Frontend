@@ -715,3 +715,8 @@ button:disabled,
 .profile-menu__logout:hover { background: #fff0df; color: #985324; }
 .desktop-nav .nav-link { padding: 0; background: transparent; border-radius: 0; font-weight: 600; }
 .desktop-nav .nav-link:hover, .desktop-nav .nav-link--active { background: transparent; color: #766b61; }
+
+.desktop-nav .nav-link { padding: 9px 14px; border-radius: 999px; transition: background 180ms ease, color 180ms ease; }
+.desktop-nav .nav-link:hover { background: #fbe7d4; color: #985324; }
+.desktop-nav .nav-link--active { background: transparent; color: #766b61; }
+.desktop-nav .nav-link--active:hover { background: #fbe7d4; color: #985324; }
