@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { products } from "../data";
-import { formatRussianPhone, RUSSIAN_PHONE_PATTERN } from "../utils/phone";
+import { formatRussianPhone, handlePhoneKeyDown, RUSSIAN_PHONE_PATTERN } from "../utils/phone";
 import "./styles/Checkout.css";
 
 function toDateInputValue(date) {
@@ -56,7 +56,7 @@ export default function Checkout() {
                     <div className="checkout-row">
                         <label className="form-field">
                             <span className="form-label">Телефон</span>
-                            <input className="field" type="tel" inputMode="tel" autoComplete="tel" value={phone} maxLength={18} placeholder="+7-(999)-999-99-99" onChange={(event) => setPhone(formatRussianPhone(event.target.value))} required />
+                            <input className="field" type="tel" inputMode="tel" autoComplete="tel" value={phone} maxLength={18} placeholder="+7-(999)-999-99-99" onKeyDown={(event) => handlePhoneKeyDown(event, setPhone)} onChange={(event) => setPhone(formatRussianPhone(event.target.value))} required />
                             {!validPhone && <span className="error-text">Формат: +7-(999)-999-99-99</span>}
                         </label>
                         <label className="form-field">

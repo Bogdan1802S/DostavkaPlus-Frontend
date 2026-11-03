@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
-import { formatRussianPhone, RUSSIAN_PHONE_PATTERN } from "../utils/phone";
+import { formatRussianPhone, handlePhoneKeyDown, RUSSIAN_PHONE_PATTERN } from "../utils/phone";
 import "./styles/Register.css";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -48,7 +48,7 @@ export default function Register() {
 
                 <label className="form-field">
                     <span className="form-label">Телефон</span>
-                    <input className="field" type="tel" inputMode="tel" autoComplete="tel" value={form.phone} maxLength={18} placeholder="+7-(999)-999-99-99" onChange={(e) => update("phone", formatRussianPhone(e.target.value))} />
+                    <input className="field" type="tel" inputMode="tel" autoComplete="tel" value={form.phone} maxLength={18} placeholder="+7-(999)-999-99-99" onKeyDown={(e) => handlePhoneKeyDown(e, (phone) => update("phone", phone))} onChange={(e) => update("phone", formatRussianPhone(e.target.value))} />
                 </label>
 
                 <label className="form-field">
