@@ -4,7 +4,7 @@
 .cart-item-info { display: grid; gap: 6px; }
 .cart-item-info .muted { font-size: 12px; }
 .quantity-control { height: 32px; display: flex; align-items: center; justify-content: space-around; border: 1px solid var(--border); border-radius: 6px; }
-.quantity-control button { width: 28px; height: 30px; border: 0; background: transparent; color: var(--primary); font-size: 18px; font-weight: 700; }
+.quantity-control button { width: 28px; height: 30px; border: 0; background: transparent; color: var(--orange-dark); font-size: 18px; font-weight: 700; }
 .quantity-control strong { min-width: 20px; text-align: center; }
 .line-total { white-space: nowrap; }
 .remove-item { border: 0; background: transparent; color: var(--muted); font-size: 22px; }

@@ -3,13 +3,13 @@ import "./styles/CourierOrders.css";
 
 export default function CourierOrders() {
     const { orders, setOrders, courierOnline, setCourierOnline, setToast } = useOutletContext();
-    const assignedOrders = orders.filter((order) => order.courier === "Иван П." || order.status === "Новый");
+    const assignedOrders = orders.filter((order) => order.courier === "Иван П." && ["Собирается", "В пути", "Доставлен"].includes(order.status));
 
     function updateStatus(id, status) {
         setOrders((current) => current.map((order) => (
             order.id === id ? { ...order, status, courier: "Иван П." } : order
         )));
-        setToast(status === "В пути" ? "Заказ принят" : "Клиент уведомлён: заказ доставлен");
+        setToast(status === "В пути" ? "Доставка начата" : "Клиент уведомлён: заказ доставлен");
     }
 
     return (
@@ -29,20 +29,20 @@ export default function CourierOrders() {
                 <article className="delivery-card card" key={order.id}>
                     <div className="delivery-card-top">
                         <h2>Заказ №{order.id}</h2>
-                        <span className={`status-badge ${order.status === "Доставлен" ? "status-done" : order.status === "Новый" ? "status-new" : "status-active"}`}>
+                        <span className={`status-badge ${order.status === "Доставлен" ? "status-done" : "status-active"}`}>
               {order.status}
             </span>
                     </div>
                     <p className="delivery-address">{order.shortAddress} · {order.time}</p>
                     <p className="delivery-phone">Телефон клиента: <a href={`tel:${order.phone.replace(/[^\d+]/g, "")}`}>{order.phone}</a></p>
-                    <span className={`payment-badge ${order.payment === "online" ? "paid" : "cash"}`}>
-            {order.payment === "online" ? "Оплачен онлайн" : `Наличными ${order.total} руб.`}
+                    <span className="payment-badge paid">{order.paid ? "Оплачен онлайн" : "Ожидает оплаты онлайн"}
           </span>
 
                     <div className="delivery-action">
-                        {order.status === "Новый" && (
-                            <button className="button button-primary" disabled={!courierOnline} onClick={() => updateStatus(order.id, "В пути")}>Принять</button>
+                        {order.status === "Собирается" && (
+                            <button className="button button-primary" disabled={!courierOnline} onClick={() => updateStatus(order.id, "В пути")}>Начать доставку</button>
                         )}
+                        {order.status !== "Доставлен" && <a className="button button-outline route-button" target="_blank" rel="noreferrer" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(order.address)}`}>Маршрут</a>}
                         {order.status === "В пути" && (
                             <button className="button button-primary delivered-button" onClick={() => updateStatus(order.id, "Доставлен")}>Доставлено</button>
                         )}

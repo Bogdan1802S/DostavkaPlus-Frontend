@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import {
     Link,
+    Navigate,
     NavLink,
     Outlet,
     Route,
     Routes,
     useLocation,
     useNavigate,
+    useOutletContext,
 } from "react-router-dom";
 
 import { initialCart, initialOrders, products } from "./data";
@@ -18,6 +20,14 @@ import Checkout from "./pages/Checkout";
 import ClientOrders from "./pages/ClientOrders";
 import CourierOrders from "./pages/CourierOrders";
 import OperatorOrders from "./pages/OperatorOrders";
+import OrderTracking from "./pages/OrderTracking";
+import OperatorOrderDetail from "./pages/OperatorOrderDetail";
+import Payment from "./pages/Payment";
+
+function RequireRole({ allowed, children }) {
+    const { role } = useOutletContext();
+    return allowed.includes(role) ? children : <Navigate to={role === "guest" ? "/login" : "/"} replace />;
+}
 
 function getSavedCart() {
     try {
@@ -28,14 +38,23 @@ function getSavedCart() {
     }
 }
 
+function getSavedOrders() {
+    try {
+        const saved = localStorage.getItem("delivery-orders");
+        return saved ? JSON.parse(saved).map((order) => ({ ...order, status: order.status === "Новый" ? "Принят" : order.status })) : initialOrders;
+    } catch {
+        return initialOrders;
+    }
+}
+
 function Header({ role, cartCount }) {
     const location = useLocation();
     const navigate = useNavigate();
     const [search, setSearch] = useState("");
 
     const isStaffPage =
-        location.pathname === "/courier-orders" ||
-        location.pathname === "/operator-orders";
+        location.pathname.startsWith("/courier-orders") ||
+        location.pathname.startsWith("/operator-orders");
 
     function handleSearch(event) {
         event.preventDefault();
@@ -92,10 +111,10 @@ function Header({ role, cartCount }) {
                                 </nav>
                             )}
 
-                            <Link className="cart-link" to="/cart">
+                            {role === "client" && <Link className="cart-link" to="/cart">
                                 <span aria-hidden="true">▢</span>
                                 <span>Корзина ({cartCount})</span>
-                            </Link>
+                            </Link>}
 
                             {role === "client" ? (
                                 <button className="profile-button" onClick={logout}>
@@ -136,7 +155,7 @@ function AppLayout() {
         () => localStorage.getItem("delivery-role") || "guest"
     );
     const [cart, setCart] = useState(getSavedCart);
-    const [orders, setOrders] = useState(initialOrders);
+    const [orders, setOrders] = useState(getSavedOrders);
     const [courierOnline, setCourierOnline] = useState(true);
     const [toast, setToast] = useState("");
     const [removedCartItem, setRemovedCartItem] = useState(null);
@@ -150,6 +169,10 @@ function AppLayout() {
     }, [role]);
 
     useEffect(() => {
+        localStorage.setItem("delivery-orders", JSON.stringify(orders));
+    }, [orders]);
+
+    useEffect(() => {
         if (!toast) return undefined;
 
         const timer = window.setTimeout(() => {
@@ -160,7 +183,7 @@ function AppLayout() {
         return () => window.clearTimeout(timer);
     }, [toast]);
 
-    const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const cartCount = Math.min(99, cart.length);
 
     const cartTotal = cart.reduce((sum, item) => {
         const product = products.find((entry) => entry.id === item.productId);
@@ -260,7 +283,7 @@ function AppLayout() {
         setCart([]);
         setRole("client");
         setToast("Заказ оформлен");
-        navigate("/client-orders");
+        navigate(`/payment/${nextId}`);
     }
 
     const contextValue = useMemo(
@@ -303,17 +326,6 @@ function AppLayout() {
                 </div>
             )}
 
-            <nav className="debug-nav" aria-label="Навигация для отладки">
-                <span className="debug-nav__label">Отладка</span>
-                <Link to="/">Каталог</Link>
-                <Link to="/login">Вход</Link>
-                <Link to="/register">Регистрация</Link>
-                <Link to="/cart">Корзина</Link>
-                <Link to="/checkout">Оформление</Link>
-                <Link to="/client-orders">Мои заказы</Link>
-                <Link to="/courier-orders">Доставки</Link>
-                <Link to="/operator-orders">Все заказы</Link>
-            </nav>
         </div>
     );
 }
@@ -325,11 +337,14 @@ export default function App() {
                 <Route path="/" element={<Catalog />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/client-orders" element={<ClientOrders />} />
-                <Route path="/courier-orders" element={<CourierOrders />} />
-                <Route path="/operator-orders" element={<OperatorOrders />} />
+                <Route path="/cart" element={<RequireRole allowed={["client"]}><Cart /></RequireRole>} />
+                <Route path="/checkout" element={<RequireRole allowed={["client"]}><Checkout /></RequireRole>} />
+                <Route path="/client-orders" element={<RequireRole allowed={["client"]}><ClientOrders /></RequireRole>} />
+                <Route path="/track/:orderId" element={<RequireRole allowed={["client"]}><OrderTracking /></RequireRole>} />
+                <Route path="/payment/:orderId" element={<RequireRole allowed={["client"]}><Payment /></RequireRole>} />
+                <Route path="/courier-orders" element={<RequireRole allowed={["courier"]}><CourierOrders /></RequireRole>} />
+                <Route path="/operator-orders" element={<RequireRole allowed={["operator"]}><OperatorOrders /></RequireRole>} />
+                <Route path="/operator-orders/:orderId" element={<RequireRole allowed={["operator"]}><OperatorOrderDetail /></RequireRole>} />
                 <Route path="*" element={<Catalog />} />
             </Route>
         </Routes>

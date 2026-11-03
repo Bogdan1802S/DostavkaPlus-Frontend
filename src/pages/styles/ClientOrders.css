@@ -1,6 +1,6 @@
 .segment-control { width: fit-content; display: flex; margin: 0 0 16px; padding: 3px; border: 1px solid var(--border); border-radius: 20px; background: #fff; }
 .segment-control button { min-width: 112px; padding: 8px 14px; border: 0; border-radius: 18px; background: transparent; color: var(--text); }
-.segment-control button.selected { background: var(--primary); color: #fff; font-weight: 700; }
+.segment-control button.selected { background: var(--primary); color: #263238; font-weight: 700; }
 .client-order-card { margin-bottom: 16px; padding: 16px 20px; }
 .client-order-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .client-order-head h2 { margin: 0; font-size: 16px; }
@@ -16,6 +16,17 @@
 .client-order-bottom p { margin: 4px 0; color: #546e7a; }
 .completed-order .client-order-bottom { margin-top: 16px; }
 .orders-empty { padding: 28px; text-align: center; color: var(--muted); }
+.order-open-link { padding: 0; border: 0; background: transparent; color: var(--link); font: inherit; font-weight: 700; text-align: left; }
+.tracking-page { max-width: 900px; margin: 0 auto; padding: 24px; }
+.tracking-page h1 { margin: 12px 0; font-size: 25px; }
+.tracking-back { display: inline-block; margin-bottom: 12px; color: var(--link); }
+.tracking-progress { margin-block: 42px 32px; }
+.tracking-details { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.tracking-details h2 { font-size: 17px; }
+.tracking-details p { display: flex; justify-content: space-between; gap: 16px; color: var(--muted); }
+.tracking-details a { color: var(--link); }
+.tracking-total { display: block; margin-top: 18px; text-align: right; }
+@media (max-width: 620px) { .tracking-details { grid-template-columns: 1fr; gap: 10px; } }
 @media (max-width: 600px) {
     .client-order-card { padding: 14px; }
     .order-progress { margin-inline: 0; }

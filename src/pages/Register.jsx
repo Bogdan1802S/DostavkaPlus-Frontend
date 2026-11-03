@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
+import { formatRussianPhone, RUSSIAN_PHONE_PATTERN } from "../utils/phone";
 import "./styles/Register.css";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const PHONE_PATTERN = /^\+7 \d{3} \d{3}-\d{2}-\d{2}$/;
 
 export default function Register() {
     const { setRole, setToast } = useOutletContext();
@@ -15,7 +15,7 @@ export default function Register() {
 
     const validName = /^[А-Яа-яЁёA-Za-z -]{2,30}$/.test(form.name.trim());
     const validPassword = form.password.length >= 8 && form.password.length <= 32 && /\d/.test(form.password);
-    const canSubmit = validName && PHONE_PATTERN.test(form.phone) &&
+    const canSubmit = validName && RUSSIAN_PHONE_PATTERN.test(form.phone) &&
         EMAIL_PATTERN.test(form.email) && form.email.length <= 64 && validPassword && agreed;
 
     function update(field, value) {
@@ -48,7 +48,7 @@ export default function Register() {
 
                 <label className="form-field">
                     <span className="form-label">Телефон</span>
-                    <input className="field" value={form.phone} maxLength={17} placeholder="+7 900 123-45-67" onChange={(e) => update("phone", e.target.value)} />
+                    <input className="field" type="tel" inputMode="tel" autoComplete="tel" value={form.phone} maxLength={18} placeholder="+7-(999)-999-99-99" onChange={(e) => update("phone", formatRussianPhone(e.target.value))} />
                 </label>
 
                 <label className="form-field">

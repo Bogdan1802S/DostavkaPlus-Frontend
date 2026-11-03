@@ -4,7 +4,7 @@ import { categories, products } from "../data";
 import "./styles/Catalog.css";
 
 export default function Catalog() {
-    const { cart, cartTotal, addToCart, orders, role } = useOutletContext();
+    const { cart, cartTotal, addToCart, orders, role, setToast } = useOutletContext();
     const [category, setCategory] = useState(categories[0]);
     const location = useLocation();
     const navigate = useNavigate();
@@ -21,6 +21,14 @@ export default function Catalog() {
     );
 
     const activeOrder = orders.find((order) => !["Доставлен", "Отменён"].includes(order.status));
+    function addProduct(productId) {
+        if (role !== "client") {
+            setToast("Войдите, чтобы добавлять товары в корзину");
+            navigate("/login");
+            return;
+        }
+        addToCart(productId);
+    }
     const cartLines = cart.map((item) => ({
         ...item,
         product: products.find((product) => product.id === item.productId),
@@ -65,9 +73,7 @@ export default function Catalog() {
                                     <span className="muted">{product.unit}</span>
                                     <strong>{product.price} руб.</strong>
                                 </div>
-                                <button className="button button-primary add-button" onClick={() => addToCart(product.id)}>
-                                    В корзину
-                                </button>
+                                {role === "client" ? <button className="button button-primary add-button" onClick={() => addProduct(product.id)}>В корзину</button> : <button className="button button-outline add-button" onClick={() => addProduct(product.id)}>Войти, чтобы купить</button>}
                             </article>
                         ))}
                         {!shownProducts.length && <p className="empty-result">Товары не найдены.</p>}
@@ -76,7 +82,7 @@ export default function Catalog() {
             </section>
 
             <aside className="catalog-sidebar">
-                <section className="side-widget card">
+                {role === "client" && <section className="side-widget card">
                     <h2>Ваша корзина</h2>
                     {cartLines.length ? (
                         <>
@@ -94,9 +100,9 @@ export default function Catalog() {
                     <button className="button button-primary full-button" onClick={() => navigate("/cart")}>
                         Открыть корзину
                     </button>
-                </section>
+                </section>}
 
-                <section className="side-widget card">
+                {role === "client" && <section className="side-widget card">
                     <h2>Статус заказа</h2>
                     {activeOrder ? (
                         <>
@@ -110,10 +116,10 @@ export default function Catalog() {
                                 ))}
                             </div>
                             <p className="muted">Курьер: {activeOrder.courier || "назначается"}</p>
-                            {role === "client" && <button className="text-button" onClick={() => navigate("/client-orders")}>Подробнее</button>}
+                            <button className="text-button" onClick={() => navigate(`/track/${activeOrder.id}`)}>Отследить заказ</button>
                         </>
                     ) : <p className="muted">Активных заказов пока нет.</p>}
-                </section>
+                </section>}
 
                 <div className="delivery-note">
                     <strong>Бесплатная доставка от 1000 руб.</strong>

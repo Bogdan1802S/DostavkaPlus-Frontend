@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { products } from "../data";
+import { formatRussianPhone, RUSSIAN_PHONE_PATTERN } from "../utils/phone";
 import "./styles/Checkout.css";
 
 function toDateInputValue(date) {
@@ -9,14 +10,14 @@ function toDateInputValue(date) {
 }
 
 export default function Checkout() {
-    const { cart, cartTotal, placeOrder, role } = useOutletContext();
+    const { cart, cartTotal, placeOrder, role, orders } = useOutletContext();
     const navigate = useNavigate();
     const today = new Date();
     const maxDay = new Date();
     maxDay.setDate(today.getDate() + 7);
 
     const [address, setAddress] = useState("г. Ростов-на-Дону, ул. Садовая, д. 10, кв. 5");
-    const [phone, setPhone] = useState("+7 900 123-45-67");
+    const [phone, setPhone] = useState("+7-(900)-123-45-67");
     const [date, setDate] = useState(toDateInputValue(today));
     const [time, setTime] = useState("");
     const [payment, setPayment] = useState("online");
@@ -27,7 +28,9 @@ export default function Checkout() {
         [cart]
     );
     const slots = Array.from({ length: 12 }, (_, index) => `${String(index + 10).padStart(2, "0")}:00–${String(index + 11).padStart(2, "0")}:00`);
-    const validPhone = /^\+7 \d{3} \d{3}-\d{2}-\d{2}$/.test(phone);
+    const selectedDate = new Date(`${date}T00:00:00`).toLocaleDateString("ru-RU");
+    const occupiedSlots = new Set(orders.filter((order) => order.date === selectedDate && !["Доставлен", "Отменён"].includes(order.status)).map((order) => order.time));
+    const validPhone = RUSSIAN_PHONE_PATTERN.test(phone);
     const canSubmit = Boolean(address.trim() && address.length <= 100 && validPhone && date && time && cart.length);
 
     function submit(event) {
@@ -37,7 +40,6 @@ export default function Checkout() {
             navigate("/login");
             return;
         }
-        // В этой демонстрационной версии платёжный шлюз заменён подтверждением заказа.
         placeOrder({ address, phone, date: new Date(`${date}T00:00:00`).toLocaleDateString("ru-RU"), time, payment, comment, total: cartTotal + 150 });
     }
 
@@ -54,8 +56,8 @@ export default function Checkout() {
                     <div className="checkout-row">
                         <label className="form-field">
                             <span className="form-label">Телефон</span>
-                            <input className="field" value={phone} maxLength={17} onChange={(event) => setPhone(event.target.value)} required />
-                            {!validPhone && <span className="error-text">Формат: +7 900 123-45-67</span>}
+                            <input className="field" type="tel" inputMode="tel" autoComplete="tel" value={phone} maxLength={18} placeholder="+7-(999)-999-99-99" onChange={(event) => setPhone(formatRussianPhone(event.target.value))} required />
+                            {!validPhone && <span className="error-text">Формат: +7-(999)-999-99-99</span>}
                         </label>
                         <label className="form-field">
                             <span className="form-label">Дата</span>
@@ -65,7 +67,7 @@ export default function Checkout() {
                             <span className="form-label">Время</span>
                             <select className="select" value={time} onChange={(event) => setTime(event.target.value)} required>
                                 <option value="">Выберите</option>
-                                {slots.map((slot) => <option key={slot} value={slot}>{slot}</option>)}
+                                {slots.map((slot) => <option key={slot} value={slot} disabled={occupiedSlots.has(slot)}>{slot}{occupiedSlots.has(slot) ? " — занято" : ""}</option>)}
                             </select>
                         </label>
                     </div>
@@ -73,7 +75,6 @@ export default function Checkout() {
                     <fieldset className="payment-fieldset">
                         <legend className="form-label">Способ оплаты</legend>
                         <label><input type="radio" name="payment" checked={payment === "online"} onChange={() => setPayment("online")} /> Картой онлайн</label>
-                        <label><input type="radio" name="payment" checked={payment === "cash"} onChange={() => setPayment("cash")} /> Наличными курьеру</label>
                     </fieldset>
 
                     <label className="form-field">

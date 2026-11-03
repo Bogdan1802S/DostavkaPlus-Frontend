@@ -6,7 +6,7 @@ import "./styles/Cart.css";
 const DELIVERY = 150;
 
 export default function Cart() {
-    const { cart, setQuantity, removeFromCart, restoreCartItem, role, setToast } = useOutletContext();
+    const { cart, setQuantity, removeFromCart, role } = useOutletContext();
     const navigate = useNavigate();
     const [promo, setPromo] = useState("");
     const [discount, setDiscount] = useState(0);
@@ -54,12 +54,7 @@ export default function Cart() {
                         <button
                             className="remove-item"
                             aria-label={`Удалить ${item.product.name}`}
-                            onClick={() => {
-                                const removed = removeFromCart(item.productId);
-                                setTimeout(() => {
-                                    if (window.confirm("Вернуть товар в корзину?")) restoreCartItem(removed);
-                                }, 100);
-                            }}
+                            onClick={() => removeFromCart(item.productId)}
                         >
                             ×
                         </button>

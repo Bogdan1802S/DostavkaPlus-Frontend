@@ -8,5 +8,21 @@
 .operator-actions { display: flex; gap: 6px; }
 .small-action { min-height: 30px; padding: 4px 9px; font-size: 12px; }
 .table-empty { padding: 24px !important; text-align: center; color: var(--muted); }
+.report-button { margin: -4px 0 16px; }
+.operator-actions { min-width: 230px; flex-wrap: wrap; align-items: center; }
+.stock-ok { color: var(--success); font-size: 12px; font-weight: 700; }
+.report-backdrop { position: fixed; z-index: 50; inset: 0; display: grid; place-items: center; padding: 20px; background: rgba(30, 25, 20, .45); }
+.report-dialog { width: min(100%, 440px); padding: 24px; }
+.report-dialog h2 { margin: 0 0 20px; }
+.report-dialog .form-field { margin-bottom: 14px; }
+.report-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px; }
+.operator-order-detail { max-width: 720px; margin: 0 auto; padding: 24px; }
+.operator-order-detail > a { color: var(--link); }
+.order-facts { display: grid; grid-template-columns: 150px 1fr; gap: 12px; }
+.order-facts dt { color: var(--muted); }
+.order-facts dd { margin: 0; }
+.stock-check-row { display: flex; align-items: center; gap: 14px; margin: 16px 0; }
+.operator-order-detail > .button-primary { min-width: 190px; }
+@media print { .site-header, .operator-filters, .report-button, .report-backdrop { display: none !important; } }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
 @media (max-width: 560px) { .operator-filters { grid-template-columns: 1fr; } }

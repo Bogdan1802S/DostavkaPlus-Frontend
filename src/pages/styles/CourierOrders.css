@@ -17,7 +17,9 @@
 .delivery-action { position: absolute; right: 20px; bottom: 16px; }
 .delivered-button { background: var(--success); }
 .completed-label { color: var(--success); font-weight: 700; }
+.route-button { position: absolute; right: 130px; bottom: 16px; min-height: 38px; padding: 8px 16px; border-radius: 999px; text-decoration: none; }
 @media (max-width: 560px) {
-    .delivery-action { position: static; margin-top: 14px; }
+    .delivery-action { position: static; display: flex; gap: 8px; margin-top: 14px; }
     .delivery-action .button { width: 100%; }
+    .route-button { position: static; display: inline-flex; align-items: center; justify-content: center; margin-top: 12px; }
 }

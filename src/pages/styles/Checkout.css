@@ -8,6 +8,10 @@
 .payment-fieldset input { accent-color: var(--primary); }
 .character-count { display: block; margin-top: 4px; color: var(--muted); text-align: right; font-size: 11px; }
 .checkout-disclaimer { color: var(--muted); font-size: 11px; }
+.payment-page { width: min(100%, 480px); margin: 32px auto; padding: 26px; }
+.payment-page h1 { font-size: 24px; }
+.payment-kicker { color: var(--muted); font-size: 13px; }
+.payment-cancel { display: block; margin: 16px auto 0; }
 .checkout-summary { padding: 16px; }
 .checkout-summary h2 { margin: 0 0 16px; font-size: 17px; }
 .checkout-item { display: flex; justify-content: space-between; gap: 8px; margin: 12px 0; font-size: 13px; }

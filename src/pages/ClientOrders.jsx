@@ -47,7 +47,7 @@ export default function ClientOrders() {
                 return (
                     <article className={`client-order-card card ${order.status === "Доставлен" ? "completed-order" : ""}`} key={order.id}>
                         <div className="client-order-head">
-                            <h2>Заказ №{order.id} от {order.date}</h2>
+                            <h2><button className="order-open-link" onClick={() => navigate(`/track/${order.id}`)}>Заказ №{order.id} от {order.date}</button></h2>
                             <span className={`status-badge ${badgeClass(order.status)}`}>{order.status}</span>
                         </div>
 
@@ -67,7 +67,7 @@ export default function ClientOrders() {
 
                         <div className="client-order-bottom">
                             <div>
-                                {order.courier && <p>Курьер: {order.courier}, <a href="tel:+79005551234">+7 900 555-12-34</a></p>}
+                                {order.courier && <p>Курьер: {order.courier}, <a href={`tel:${(order.courierPhone || "+7 900 555-12-34").replace(/[^\d+]/g, "")}`}>{order.courierPhone || "+7 900 555-12-34"}</a></p>}
                                 <p>Сумма: {order.total} руб.</p>
                             </div>
                             {canCancel && (
