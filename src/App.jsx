@@ -150,6 +150,7 @@ function Header({ role, cartCount }) {
 
 function AppLayout() {
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [role, setRole] = useState(
         () => localStorage.getItem("delivery-role") || "guest"
